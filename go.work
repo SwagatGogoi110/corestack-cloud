@@ -1,0 +1,14 @@
+// CoreStack Monorepo Workspace.
+// Ties the per-provider Go modules together sp `go build ./...`, `go test`, and editor tooling work across the repo without changing any module's own path or go.mod.
+// Each provider remains an independent module - this file only affects local multi-module development
+
+// The modules pin different Go version (aws: 1.23, azure: 1.22, gcp: 1.23). The workspace go directive must be >= the highest, so it is set to 1.23.
+// Build each module with its own toolchain if you need to honor a lower pin.
+go 1.23
+
+use (
+   ./gcp
+)
+
+//./aws
+//./azure

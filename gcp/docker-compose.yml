@@ -1,0 +1,19 @@
+services:
+  corestack-gcp:
+    build: 
+      context: .
+      dockerfile: docker/dockerfile
+      args:
+        VERSION: ${VERSION:-dev}
+    image: corestack-gcp:${VERSION:-dev}
+    container_name: corestack-gcp
+    ports:
+      - "4588:4588"
+
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4588/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped

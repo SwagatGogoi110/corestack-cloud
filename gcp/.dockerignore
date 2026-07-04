@@ -1,0 +1,16 @@
+bin/
+data/
+*.log
+
+docs/
+*.md
+scripts/
+
+.git/
+.gitignore
+.idea/
+.vscode/
+*.swp
+
+*.test
+coverage.out
