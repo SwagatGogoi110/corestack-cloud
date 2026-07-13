@@ -75,7 +75,7 @@ func TestBucketLifecycle(t *testing.T) {
 	}
 }
 
-func TestBucketNameRequired(t *testing.T)  {
+func TestBucketNameRequired(t *testing.T) {
 	h := New()
 	rec := route(h, "POST", "/storage/v1/b", `{}`)
 	if rec.Code != 400 {
@@ -89,7 +89,7 @@ func TestBucketNameRequired(t *testing.T)  {
 	}
 }
 
-func TestObjectLifeCycle(t *testing.T)  {
+func TestObjectLifeCycle(t *testing.T) {
 	h := New()
 	route(h, "POST", "/storage/v1/b?project=p1", `{"name": "b1"}`)
 
@@ -125,7 +125,7 @@ func TestObjectLifeCycle(t *testing.T)  {
 	}
 }
 
-func TestObjectBucketNotFound(t *testing.T)  {
+func TestObjectBucketNotFound(t *testing.T) {
 	h := New()
 	rec := route(h, "GET", "/storage/v1/b/nope/o", "")
 	if rec.Code != 404 {

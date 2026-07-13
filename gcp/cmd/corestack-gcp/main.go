@@ -8,11 +8,12 @@ import (
 
 	"github.com/corestack-io/corestack-gcp/internal/core/protocol"
 	"github.com/corestack-io/corestack-gcp/internal/services/gcs"
+	"github.com/corestack-io/corestack-gcp/internal/services/operations"
 )
 
 var version = "dev"
 
-func main()  {
+func main() {
 	reg := protocol.NewRegistry()
 	registerAll(reg)
 
@@ -28,13 +29,13 @@ func main()  {
 }
 
 func topHandler(reg *protocol.Registry) http.Handler {
-	health := func(w http.ResponseWriter, _ *http.Request)  {
+	health := func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		_ = json.NewEncoder(w).Encode(map[string]any{
-			"status": "ok",
+			"status":   "ok",
 			"emulator": "corestack-gcp",
-			"version": version,
+			"version":  version,
 			"services": reg.EnabledServices(),
 		})
 	}
@@ -47,4 +48,5 @@ func topHandler(reg *protocol.Registry) http.Handler {
 
 func registerAll(reg *protocol.Registry) {
 	reg.Register(protocol.ServiceDescriptor{Name: "gcs", Protocol: protocol.REST}, gcs.New())
+	reg.Register(protocol.ServiceDescriptor{Name: "operations", Protocol: protocol.REST}, operations.New())
 }
