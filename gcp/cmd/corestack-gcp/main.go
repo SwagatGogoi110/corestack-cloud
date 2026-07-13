@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/corestack-io/corestack-gcp/internal/core/protocol"
+	"github.com/corestack-io/corestack-gcp/internal/services/gcs"
 )
 
 var version = "dev"
@@ -45,5 +46,5 @@ func topHandler(reg *protocol.Registry) http.Handler {
 }
 
 func registerAll(reg *protocol.Registry) {
-//	reg.Register(protocol.ServiceDescriptor{Name: "gcs", Protocol: protocol.REST}, gcs.New())
+	reg.Register(protocol.ServiceDescriptor{Name: "gcs", Protocol: protocol.REST}, gcs.New())
 }
