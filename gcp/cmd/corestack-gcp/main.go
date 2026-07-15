@@ -8,6 +8,7 @@ import (
 
 	"github.com/corestack-io/corestack-gcp/internal/core/protocol"
 	"github.com/corestack-io/corestack-gcp/internal/services/gcs"
+	"github.com/corestack-io/corestack-gcp/internal/services/iam"
 	"github.com/corestack-io/corestack-gcp/internal/services/operations"
 )
 
@@ -49,4 +50,5 @@ func topHandler(reg *protocol.Registry) http.Handler {
 func registerAll(reg *protocol.Registry) {
 	reg.Register(protocol.ServiceDescriptor{Name: "gcs", Protocol: protocol.REST}, gcs.New())
 	reg.Register(protocol.ServiceDescriptor{Name: "operations", Protocol: protocol.REST}, operations.New())
+	reg.Register(protocol.ServiceDescriptor{Name: "iam", Protocol: protocol.REST}, iam.New())
 }
